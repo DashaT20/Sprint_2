@@ -4,14 +4,8 @@ class EmployeeSalary:
     def __init__(self, name, rest_days, hours = None, email = None):
         self.name = name
         self.rest_days = rest_days
-        if hours is None:
-            self.hours = self.get_hours()  
-        else:
-            self.hours = hours
-        if email is None:
-            self.email = self.get_email()
-        else:
-            self.email = email
+        self.hours = hours if hours is not None else self.get_hours(rest_days)
+        self.email = email if email is not None else self.get_email(name)
         
 
     @classmethod
@@ -20,7 +14,7 @@ class EmployeeSalary:
     
     @classmethod
     def get_email(cls, name):
-        return cls(f"{name}@email.com")
+        return f"{name}@email.com"
     
     @classmethod
     def set_hourly_payment(cls, new_hourly_payment):
